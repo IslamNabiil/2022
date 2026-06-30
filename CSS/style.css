@@ -315,7 +315,7 @@ body {
 .cvv { grid-area: ccc; }
 .dvv { grid-area: dcc; }
 
-/* Third section */
+/* Third section - PHOTOS WITH ANIMATIONS ================= */
 #section3 p {
     margin: 0 clamp(15px, 5%, 30%) 0 4%;
     font-size: clamp(14px, 2.2vw, 16px);
@@ -337,12 +337,54 @@ body {
     aspect-ratio: 1 / 1;
     overflow: hidden;
     border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+}
+
+.waa::before, .wbb::before, .wcc::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    padding: 3px;
+    background: linear-gradient(45deg, #ff6b6b, #ffa06b, #62baea, #ff6b9d);
+    background-size: 300% 300%;
+    animation: gradientShift 3s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.waa:hover::before, .wbb:hover::before, .wcc:hover::before {
+    opacity: 1;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .waa img, .wbb img, .wcc img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.4s ease,
+                box-shadow 0.4s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.waa:hover img, .wbb:hover img, .wcc:hover img {
+    transform: scale(1.1) rotateY(5deg);
+    filter: brightness(1.1) saturate(1.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .photos2 {
@@ -360,13 +402,82 @@ body {
     aspect-ratio: 1 / 1;
     overflow: hidden;
     border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+}
+
+.ray::before, .rab::before, .ran::before, 
+.raq::before, .raw::before, .ras::before, .raa::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    padding: 3px;
+    background: linear-gradient(45deg, #ffa06b, #62baea, #ff6b9d, #ff6b6b);
+    background-size: 300% 300%;
+    animation: gradientShift 3s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.ray:hover::before, .rab:hover::before, .ran:hover::before,
+.raq:hover::before, .raw:hover::before, .ras:hover::before, .raa:hover::before {
+    opacity: 1;
 }
 
 .ray img, .rab img, .ran img, .raq img, .raw img, .ras img, .raa img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.4s ease,
+                box-shadow 0.4s ease;
+    position: relative;
+    z-index: 2;
 }
+
+.ray:hover img, .rab:hover img, .ran:hover img,
+.raq:hover img, .raw:hover img, .ras:hover img, .raa:hover img {
+    transform: scale(1.1) rotateY(5deg);
+    filter: brightness(1.1) saturate(1.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Staggered animation for photos on scroll */
+.photos > div,
+.photos2 > div {
+    opacity: 0;
+    animation: slideUpFade 0.6s ease forwards;
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.photos > div:nth-child(1) { animation-delay: 0.1s; }
+.photos > div:nth-child(2) { animation-delay: 0.2s; }
+.photos > div:nth-child(3) { animation-delay: 0.3s; }
+
+.photos2 > div:nth-child(1) { animation-delay: 0.1s; }
+.photos2 > div:nth-child(2) { animation-delay: 0.2s; }
+.photos2 > div:nth-child(3) { animation-delay: 0.3s; }
+.photos2 > div:nth-child(4) { animation-delay: 0.4s; }
+.photos2 > div:nth-child(5) { animation-delay: 0.5s; }
+.photos2 > div:nth-child(6) { animation-delay: 0.6s; }
+.photos2 > div:nth-child(7) { animation-delay: 0.7s; }
 
 .final-message {
     font-weight: 400;
